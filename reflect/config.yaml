@@ -1,0 +1,62 @@
+# MySQL DB
+mysql:
+  - name: finance_master
+    host: "root:qwe123@tcp(127.0.0.1:3306)/tang_finance?charset=utf8&parseTime=True&loc=Local"
+    max_idle: 10
+    max_conn: 100
+  - name: finance_slave
+    host: "root:qwe123@tcp(127.0.0.1:3306)/tang_finance?charset=utf8&parseTime=True&loc=Local"
+    max_idle: 10
+    max_conn: 100
+
+# Scylla DB
+cql:
+  - name: apple-tree
+    host: 127.0.0.1
+    port: 9042
+    keyspace: apple-tree
+    page_size: 2000
+    time_out: 1 
+    consistency: QUORUM
+
+
+# REDIS
+redis:
+  - name: user_session
+    host: "127.0.0.1:6379"
+    max_idle: 10
+    max_conn: 100
+    number: 8
+  - name: user_game_session
+    host: "127.0.0.1:6379"
+    max_idle: 10
+    max_conn: 100
+    number: 9
+
+# grpc service client
+grpc:
+  - name: apple-tree
+    host: "127.0.0.1:8802"
+  - name: archimedes
+    host: "127.0.0.1:8862"
+  - name: account
+    host: "127.0.0.1:8864"
+
+
+
+# NSQ
+nsq:
+  nsqdlookup_host: nsqlookupd
+  nsqdlookup_port: 4161
+  nsqd_host: nsqd
+  nsqd_port: 4150
+  nsqd_max_in_flight: 200
+  nsqd_handler_concurrency: 200
+
+
+# self define
+const:
+  api_prefix: /api
+  api_port: 8080
+  grpc_port: 8801
+
