@@ -1,0 +1,14 @@
+kind: pipeline
+name: lib
+
+steps:
+- name: golangci-lint
+  image: golangci/golangci-lint:v1.30.0
+  environment:
+    CGO_ENABLED: 0
+    GO111MODULE: on
+  commands:
+    - go get -u --insecure ./...
+    - go test -cover
+    - go mod vendor
+    - golangci-lint run

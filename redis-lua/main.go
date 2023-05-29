@@ -59,6 +59,12 @@ func main() {
 	fmt.Println("balance is :", b)
 
 	RedisAddUserPoint(appleTreeRClient, 1, 23456, "abcdef")
+
+
+	RedisExistHashKey(appleTreeRClient, 23456, "abcdef")
+	RedisClearHashIdRecord(appleTreeRClient, 23456, "abcdef")
+
+	RedisExistHashKey(appleTreeRClient, 23456, "abcdef")
 }
 
 // 取得對應的redis key
@@ -84,7 +90,7 @@ func RedisGetUserPoint(conn *redis.Client, userId int, hashId string) int {
 // bool:回傳操作是否成功，int：回傳目前餘額
 func RedisAddUserPoint(conn *redis.Client, point, userId int, hashId string) {
 
-	scriptHash, err1 := conn.ScriptLoad(luaScript).Result()
+	scriptHash, _ := conn.ScriptLoad(luaScript).Result()
 
 	result := conn.EvalSha(scriptHash, []string{ConstUserPoint, getUserKey(userId, hashId)}, point)
 
@@ -92,13 +98,28 @@ func RedisAddUserPoint(conn *redis.Client, point, userId int, hashId string) {
 
 	fmt.Println(r, getResultErr)
 
-	a := r.([]interface{})
-	r1, _ := strconv.ParseBool(a[0].(string))
-	r2, _ := strconv.ParseFloat(a[1].(string), 64)
-	r3, _ := strconv.ParseFloat(a[2].(string), 64)
-
-	fmt.Println(err1, r, getResultErr, r1, r2, r3)
+	//a := r.([]interface{})
+	//r1, _ := strconv.ParseBool(a[0].(string))
+	//r2, _ := strconv.ParseFloat(a[1].(string), 64)
+	//r3, _ := strconv.ParseFloat(a[2].(string), 64)
+	//
+	//fmt.Println(err1, r, getResultErr, r1, r2, r3)
 }
+
+
+func RedisClearHashIdRecord(conn *redis.Client, userId int, hashId string) {
+
+	result := conn.HDel(ConstUserPoint, getUserKey(userId, hashId))
+
+	fmt.Println( result.Err())
+}
+
+func RedisExistHashKey(conn *redis.Client, userId int, hashId string) {
+	result := conn.HExists(ConstUserPoint, getUserKey(userId, hashId))
+
+	fmt.Println( result.Val())
+}
+
 
 
 func newRedisConnection(addr string, maxIdle int, maxConn int, db int) (client *redis.Client, err error) {

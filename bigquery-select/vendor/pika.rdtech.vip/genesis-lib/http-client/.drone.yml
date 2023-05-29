@@ -1,0 +1,16 @@
+kind: pipeline
+name: lib
+clone:
+  skip_verify: true
+
+steps:
+- name: golangci-lint
+  image: gcr.io/rd2-test/golangci-lint:latest
+  environment:
+    CGO_ENABLED: 0
+    GO111MODULE: on
+  commands:
+    - go get -u --insecure ./...
+    - go mod vendor
+    - go test -cover
+    - golangci-lint run

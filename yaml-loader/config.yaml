@@ -1,0 +1,7 @@
+mysql:
+  test_A_B_C:
+    host: "127.0.0.1"
+    port: "3306"
+  finance_slave:
+    host: "10"
+    port: "100"

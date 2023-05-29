@@ -1,0 +1,20 @@
+workspace:
+  base: /go
+  path: src/pika.rdtech.vip/genesis-lib/${DRONE_REPO_NAME}
+
+services:
+  mysql:
+    image: mysql:5.5
+    environment:
+      - MYSQL_DATABASE=gorm
+      - MYSQL_USER=gorm
+      - MYSQL_PASSWORD=gorm
+      - MYSQL_ROOT_PASSWORD="1234"
+
+pipeline:
+  golang_test:
+    image: golang:1.14
+    commands:
+      - GO111MODULE=on go get -u -insecure ./...
+      - GO111MODULE=on DEBUG=false GORM_DIALECT=mysql go test -cover
+

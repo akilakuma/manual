@@ -33,3 +33,11 @@ func InsertRecord(userID int64, amount float64, account string) {
 
 	// TODO error report
 }
+
+
+/*
+
+// 根据 map 更新
+db.Table("users").Where("id IN ?", []int{10, 11}).Updates(map[string]interface{}{"name": "hello", "age": 18})
+// UPDATE users SET name='hello', age=18 WHERE id IN (10, 11);
+ */
