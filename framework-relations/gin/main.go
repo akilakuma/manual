@@ -14,11 +14,10 @@ func main() {
 
 }
 
-
-	// 健康偵測B
-	r.GET("/", func(c *gin.Context) {
-		c.JSON(http.StatusOK, nil)
-	})
-
-	// 以下才開始加log
-	r.Use(gin.Logger())
+//// 健康偵測B
+//r.GET("/", func(c *gin.Context) {
+//	c.JSON(http.StatusOK, nil)
+//})
+//
+//// 以下才開始加log
+//r.Use(gin.Logger())

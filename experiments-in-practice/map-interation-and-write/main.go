@@ -35,9 +35,8 @@ func main() {
 	test3()
 }
 
-
 // test1 用assign的方式，把m指向n
-// 結果: fatal error: concurrent map iteration and map write
+// 結果: fatal error: concurrent map iteration and map write
 func test1() {
 	m := make(UserMap)
 
@@ -55,13 +54,14 @@ func test1() {
 		}
 	}()
 
+	// n 等同於 m ，一邊在讀取
 	for key, value := range n {
 		log.Println(key, value)
 	}
 }
 
 // test2 用new一個新map的方式，把m的內容逐一複製到n
-// 結果: OK沒問題
+// 結果: OK沒問題
 func test2() {
 	m := make(UserMap)
 
@@ -78,13 +78,14 @@ func test2() {
 		}
 	}()
 
+	// n 已經是一個新的map，這邊讀取n不會有問題
 	for key, value := range n {
 		log.Println(key, value)
 	}
 }
 
 // test3 用assign的方式，把m指向，但是寫入map和range map前後加上lock
-// 結果: 不會爆炸，但是寫入會卡住range，range會卡住寫入，完全無法一起做事
+// 結果: 不會爆炸，但是寫入會卡住range，range會卡住寫入，完全無法一起做事
 func test3() {
 	m := make(UserMap)
 
