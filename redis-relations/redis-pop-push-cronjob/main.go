@@ -29,8 +29,6 @@ func main() {
 // PushRedis 對redis 做rpsuh
 func PushRedis() error {
 
-
-
 	conn := getConnectionPool()
 	redisC := conn.Get()
 	defer redisC.Close()
@@ -93,7 +91,6 @@ func PopRedis() error {
 
 		before = now
 	}
-
 
 	return nil
 }

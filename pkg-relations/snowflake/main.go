@@ -8,6 +8,11 @@ import (
 	"github.com/bwmarrin/snowflake"
 )
 
+/*
+	另外一種選擇是sonyflake
+	https://github.com/sony/sonyflake
+*/
+
 func main() {
 	var snowflakeNode *snowflake.Node
 	snowflakeNode = CreateSnowflake(1)

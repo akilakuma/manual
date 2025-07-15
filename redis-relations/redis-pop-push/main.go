@@ -1,6 +1,7 @@
 package main
 
 import (
+	"fmt"
 	"log"
 	Random "math/rand"
 	"os"
@@ -10,8 +11,13 @@ import (
 	"github.com/gomodule/redigo/redis"
 )
 
+var (
+	times = 10000000
+)
+
 func main() {
 
+	fmt.Println("practice start ......")
 	exitChan := make(chan struct{}, 0)
 
 	// 打開redis
@@ -28,6 +34,7 @@ func main() {
 		}
 	}
 
+	fmt.Println("practice end ......")
 	<-exitChan
 }
 
@@ -39,7 +46,7 @@ func PushRedis(redisC redis.Conn, exitChan chan struct{}) {
 	randTime := r1.Intn(10)
 
 	// 結果寫回array
-	for i := 0; i < 10000000000; i++ {
+	for i := 0; i < times; i++ {
 		time.Sleep(time.Duration(randTime) * time.Microsecond)
 		_, err := redisC.Do("RPUSH", "data_queue", "num_"+strconv.Itoa(i))
 
@@ -59,11 +66,11 @@ func PopRedis(redisC redis.Conn) {
 
 	var (
 		before string
-		now  string
+		now    string
 	)
 
 	// 結果寫回array
-	for i := 0; i < 10000000000; i++ {
+	for i := 0; i < times; i++ {
 		time.Sleep(time.Duration(randTime) * time.Microsecond)
 		s, err := redis.String(redisC.Do("LPOP", "data_queue"))
 
@@ -71,10 +78,7 @@ func PopRedis(redisC redis.Conn) {
 			log.Println(err.Error())
 		}
 
-		log.Println(s)
-
 		now = s
-
 		if before == now {
 			log.Println("有出現pop出同樣的值")
 			break
@@ -108,5 +112,4 @@ func getConnectionPool() *redis.Pool {
 			return err
 		},
 	}
-
 }

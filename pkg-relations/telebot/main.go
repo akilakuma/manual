@@ -11,8 +11,8 @@ import (
 var (
 	tgBotMLForever *tgbotapi.BotAPI
 	tgBotTest      *tgbotapi.BotAPI
-	//chatId         = "-690605257"
-	chatId = "-1001827918980"
+
+	chatId = ""
 )
 
 func main() {
@@ -34,7 +34,7 @@ func main() {
 func newMLBot() *tgbotapi.BotAPI {
 
 	// ml forever bot
-	token := "2036154314:AAFsrPCta3Sci20K6EAEh5C6xU8HTrijtUw"
+	token := ""
 
 	bot, err := tgbotapi.NewBotAPI(token)
 	if err != nil {
@@ -51,7 +51,7 @@ func newMLBot() *tgbotapi.BotAPI {
 func newTestBot() *tgbotapi.BotAPI {
 
 	// test bot
-	token := "5404679853:AAEH2EfY1h432ozPXz5MkuDvH3eCvn_0nHQ"
+	token := ""
 
 	bot, err := tgbotapi.NewBotAPI(token)
 	if err != nil {
