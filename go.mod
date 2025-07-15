@@ -3,6 +3,7 @@ module manual
 go 1.16
 
 require (
+	github.com/deckarep/golang-set v1.8.0 // indirect
 	github.com/gin-gonic/gin v1.7.4
 	github.com/go-redis/redis v6.15.9+incompatible // indirect
 	github.com/gomodule/redigo v1.9.2 // indirect

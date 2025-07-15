@@ -7,4 +7,7 @@ func main() {
 
 	// practice2: no_comma_ok_idiom
 	//practice2()
+
+	// practice3: working_pool_practice.go
+	//practice3()
 }
