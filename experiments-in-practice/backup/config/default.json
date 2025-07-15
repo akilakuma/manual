@@ -1,0 +1,27 @@
+{
+    "control": {
+        "gin_port": 80,
+        "gin_read_timeout": 60,
+        "gin_write_timeout": 60
+    },
+    "center": {
+        "gin_port": 6688,
+        "gin_read_timeout": 60,
+        "gin_write_timeout": 60,
+        "ratio_list": [
+            "1:5",
+            "1:1",
+            "2:1",
+            "4:1"
+        ],
+        "room_max_number": 2500,
+        "default_weapon": 10,
+        "max_member": 4
+    },
+    "game": {
+        "max_sf_number": 20,
+        "max_bf_number": 2,
+        "sf_period_time": 8,
+        "bf_period_time": 30
+    }
+}

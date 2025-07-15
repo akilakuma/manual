@@ -1,0 +1,40 @@
+version: '2'
+
+services:
+  # MySQL
+    mysql:
+      image: mysql:5.7
+      restart: always
+      ports:
+          - "3306:3306"
+      volumes:
+          - db:/var/lib/mysql
+      environment:
+          MYSQL_USER: root
+          MYSQL_ROOT_PASSWORD: qwe123
+      networks:
+          - internal_network
+    # MySQL IDE 介面
+    db-adminer:
+      image: phpmyadmin/phpmyadmin
+      restart: always
+      environment:
+          PMA_HOSTS: mysql
+          PMA_PORT: 3306
+      ports:
+          - "3300:80"
+      networks:
+          - internal_network
+          - external_network
+      depends_on:
+          - mysql
+volumes:
+    cache:
+        driver: "local"
+    db:
+        driver: "local"
+networks:
+    internal_network:
+        driver: bridge
+    external_network:
+        driver: bridge
