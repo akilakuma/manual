@@ -10,5 +10,4 @@ require (
 	golang.org/x/net v0.0.0-20220607020251-c690dde0001d // indirect
 	google.golang.org/genproto v0.0.0-20220607223854-30acc4cbd2aa // indirect
 	google.golang.org/grpc v1.47.0
-	pika.rdtech.vip/eden/metatron v0.0.5
 )
