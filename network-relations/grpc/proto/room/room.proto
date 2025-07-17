@@ -1,0 +1,38 @@
+syntax = "proto3";
+
+option go_package = "grpc/proto/room";
+
+package Room;
+
+service Room {
+   rpc NewRoom (NewRoomReq) returns (NewRoomResp);
+   rpc GetRoom (GetRoomReq) returns (GetRoomResp);
+}
+
+message NewRoomReq {
+   string platform_id = 1;
+   string room_name = 2;
+   string room_type = 3;
+   string book_date = 4;
+}
+
+message NewRoomResp {
+   string platform_id = 1;
+   string room_name = 2;
+   string room_type = 3;
+   string book_date = 4;
+}
+
+message GetRoomReq {
+   string platform_id = 1;
+   string room_name = 2;
+}
+
+message GetRoomResp {
+   string platform_id = 1;
+   string room_name = 2;
+   string room_type = 3;
+   string book_date = 4;
+   repeated string participants = 5; // List of participant IDs
+   string status = 6; // e.g., "booked", "available", "cancelled"
+}
