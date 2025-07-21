@@ -10,4 +10,7 @@ func main() {
 
 	// practice3: working_pool_practice.go
 	//practice3()
+
+	// practice4: working_pool_practice2.go (just try again)
+	practice4()
 }
